@@ -2,7 +2,7 @@
   "name": "cratebox-react",
   "version": "1.0.0",
   "description": "React bindings for Cratebox",
-  "main": "dist/index.js",
+  "main": "dist/cratebox-react.js",
   "scripts": {
     "rollup": "rollup -c",
     "prepare": "yarn rollup"
