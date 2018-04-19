@@ -8,7 +8,6 @@
 * [Getting Started](#getting-started)
 * [Create Context](#create-context)
 * [Cratebox Consumer](#cratebox-consumer)
-* [Thanks!](#thanks)
 
 # Installation
 
