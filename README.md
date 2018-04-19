@@ -1,4 +1,4 @@
-# Cratebox React
+![Cratebox React Logo](https://raw.githubusercontent.com/alexvcasillas/cratebox-react/master/logo/cratebox-react-logo.jpg)
 
 [Cratebox](https://github.com/alexvcasillas/cratebox) bindings for [React](https://github.com/facebook/react) in just **818B** of gzipped code (2.02KB bundle).
 
