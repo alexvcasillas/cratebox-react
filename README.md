@@ -33,7 +33,7 @@ Note: [React 16.3.x](https://github.com/facebook/react) is a peer dependency of 
 ```js
 import React from 'react';
 // Import our cratebox stuff
-import { cratebox, types } from 'cratebox`
+import { cratebox, types } from 'cratebox'
 // Import create context and consumer
 import { createContext, Consumer } from 'cratebox-react';
 // Instantiate CrateBox
