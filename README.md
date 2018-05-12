@@ -13,13 +13,13 @@
 
 NPM
 
-```
+```sh
 npm install cratebox-react
 ```
 
 Yarn
 
-```
+```sh
 yarn add cratebox-react
 ```
 
@@ -30,7 +30,7 @@ To get started with **Cratebox React** first of all you need to import the depen
 Note: [React 16.3.x](https://github.com/facebook/react) is a peer dependency of this project, meaning that, without the React library, **Cratebox React** won't work and therefore, you need to have it as a depencendy of your project.
 
 
-```
+```js
 import React from 'react';
 // Import our cratebox stuff
 import { cratebox, types } from 'cratebox`
