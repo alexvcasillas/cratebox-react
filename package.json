@@ -1,6 +1,6 @@
 {
   "name": "cratebox-react",
-  "version": "1.0.0",
+  "version": "1.2.0¡",
   "description": "React bindings for Cratebox",
   "main": "dist/cratebox-react.js",
   "scripts": {
@@ -24,6 +24,10 @@
   "peerDependencies": {
     "react": "^16.3.2"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexvcasillas/cratebox-react.git"
+  },
   "keywords": [
     "state",
     "management",
@@ -31,5 +35,6 @@
     "bindings"
   ],
   "author": "Alex Casillas <https://alexvcasillas.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {}
 }
