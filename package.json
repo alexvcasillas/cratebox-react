@@ -1,6 +1,6 @@
 {
   "name": "cratebox-react",
-  "version": "1.2.0¡",
+  "version": "1.2.0",
   "description": "React bindings for Cratebox",
   "main": "dist/cratebox-react.js",
   "scripts": {
