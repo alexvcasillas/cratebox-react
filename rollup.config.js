@@ -1,6 +1,6 @@
 import resolve from "rollup-plugin-node-resolve";
 import filesize from "rollup-plugin-filesize";
-import uglify from "rollup-plugin-uglify";
+import { uglify } from "rollup-plugin-uglify";
 import babel from "rollup-plugin-babel";
 
 export default [
