@@ -8,6 +8,7 @@
 * [Getting Started](#getting-started)
 * [Create Context](#create-context)
 * [Cratebox Consumer](#cratebox-consumer)
+* [React Hook](#react-hook)
 
 # Installation
 
@@ -164,3 +165,48 @@ This is a React Component that will be in charge of consuming and subscribing to
 The **Cratebox Consumer** Component takes on single prop called `store`, and this will be the `identifier` of the store you would like to subscribe to within this particular component.
 
 Within **Cratebox Consumer**'s direct children you'll have access to the full API of [Cratebox](https://github.com/alexvcasillas/cratebox) so you can dispatch changes to any store or even subscribe to other stores if you would like so. You'll have access to all of the subscribed model properties everytime it changes and you will be able to do Time Traveling and all of the awesome features that comes out of the box with [Cratebox](https://github.com/alexvcasillas/cratebox).
+
+## React Hook
+
+With the 2.0 version and onwards you can make use of the `useStore` hook! With this hook you can make things even more easy to deal with. This is the signature of the hook:
+
+```js
+useStore(store: string): { state: modelObject, dispatch: Function }
+```
+
+the `useStore` hook requires the name of the store you'd like to connect to. After that, it will return you an object with the `state` and `dispatch` properties.
+
+The `state` property is nothing less than the model of the store itself with its latests values.
+
+The `dispatch` property is a function that you'll have to call whenever you want to update the model and, unlike the previous version of the dispatch from the _functional children component_ or the _higher order component_, you won't need to tell the function which store you'd be making changes to, because that's already declared when using the `useStore` hook.
+
+```jsx
+import React, { useEffect } from 'react';
+import { useStore } from 'cratebox-react';
+
+function UserComponent() {
+  const { state, dispatch } = useStore('user');
+
+  function updateState(value) {
+    dispatch(value);
+  }
+
+  return (
+    <>
+    <div>
+      {state && (
+        <div>{state.name || 'John'} {state.lastName || 'Doe'} has {state.age || 'unknown'} years old.</div>
+      )}
+    </div>
+    <div>
+      <input placeholder="Name" type="text" onChange={e => updateState({ name: e.target.value })} />
+      <input placeholder="Last Name" type="text" onChange={e => updateState({ lastName: e.target.value })} />
+      <input placeholder="Age" type="text" onChange={e => updateState({ age: parseInt(e.target.value, 10) })} />
+    </div>
+    </>
+  );
+}
+
+export default UserComponent;
+
+```
