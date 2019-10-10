@@ -162,9 +162,48 @@ To make use of the **Cratebox Consumer** you need to import it in your project f
 
 This is a React Component that will be in charge of consuming and subscribing to changes of a specific store described in your [Cratebox](https://github.com/alexvcasillas/cratebox).
 
-The **Cratebox Consumer** Component takes on single prop called `store`, and this will be the `identifier` of the store you would like to subscribe to within this particular component.
+The **Cratebox Consumer** Component takes on single prop called `store`, and this will be the `identifier` of the store you would like to subscribe to within this particular component or an array with the identifiers that you would like to subscribe to.
 
 Within **Cratebox Consumer**'s direct children you'll have access to the full API of [Cratebox](https://github.com/alexvcasillas/cratebox) so you can dispatch changes to any store or even subscribe to other stores if you would like so. You'll have access to all of the subscribed model properties everytime it changes and you will be able to do Time Traveling and all of the awesome features that comes out of the box with [Cratebox](https://github.com/alexvcasillas/cratebox).
+
+The **Cratebox Consumer** as two ways of being used:
+
+1. Higher Order Component.
+2. Functional Children Component.
+
+The Higher Order Component will be used like the following:
+
+```html
+<Consumer store="user">
+  <TestComponent />
+</Consumer>
+```
+
+User store will be pased as props to `TestComponent`.
+
+The Functional Children Component is a more direct (you pass a prop called direct, no pun intended) approach of using **Cratebox React** and it's the recommended way of using it (if not using hooks, of course) and will be used like the following:
+
+```jsx
+<Consumer store="user" direct>
+{({ cratebox, state }) => (
+  <>
+    <div>My name is: {state.name}</div>
+    <input
+      type="text"
+      value={state.name}
+      onChange={e => {
+        cratebox.dispatch({
+          identifier: "user",
+          model: {
+            name: e.target.value
+          }
+        })
+      }
+    />
+  </>
+)}
+</Consumer>
+```
 
 ## React Hook
 
