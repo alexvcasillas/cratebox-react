@@ -178,7 +178,7 @@ the `useStore` hook requires the name of the store you'd like to connect to. Aft
 
 The `state` property is nothing less than the model of the store itself with its latests values.
 
-The `dispatch` property is a function that you'll have to call whenever you want to update the model and, unlike the previous version of the dispatch from the _functional children component_ or the _higher order component_, you won't need to tell the function which store you'd be making changes to, because that's already declared when using the `useStore` hook.
+The `dispatch` property is a function that you'll have to call whenever you want to update the model and, unlike the previous version of the dispatch from the _functional children component_ or the _higher order component_, you won't need to tell the function which store you'd be making changes to, because that's already declared when using the `useStore` hook so you'd only need to pass the model values.
 
 ```jsx
 import React, { useEffect } from 'react';
