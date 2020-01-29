@@ -31,35 +31,24 @@ type StoreInContext<T> = {
 
 export function useStore<T, V, A>(store: string) {
   const _stores: StoreInContext<T>[] = useContext(CrateboxReactContext);
-  const [, setState] = useState<T>({} as T);
-  const storeRef = useRef<T>({} as T);
-  const storeState = useRef<T>({} as T);
-  const storeViews = useRef<V>({} as V);
-  const storeActions = useRef<A>({} as A);
+  // @ts-ignore because it's not going to be undefined dear typscript...
+  const [state, setState] = useState<T>(_stores.find(s => s.id === store).store.state);
+  // @ts-ignore because it's not going to be undefined dear typscript...
+  const storeRef = useRef<BaseStore & T>(_stores.find(s => s.id === store).store);
+  // @ts-ignore because it's not going to be undefined dear typscript...
+  const storeViews = useRef<V>(_stores.find(s => s.id === store).store.views);
+  // @ts-ignore because it's not going to be undefined dear typscript...
+  const storeActions = useRef<A>(_stores.find(s => s.id === store).store.actions);
 
   useEffect(() => {
-    let chosenStore: BaseStore & T | null = null;
-    const amountOfStores = _stores.length;
-    let found = false;
-    for (let i = 0; i < amountOfStores && !found; i++) {
-      if (_stores[i].id === store) {
-        chosenStore = _stores[i].store;
-        found = true;
-      }
-    }
-    storeRef.current = chosenStore as T;
-    storeState.current = chosenStore && chosenStore.state;
-    storeViews.current = chosenStore && chosenStore.views;
-    storeActions.current = chosenStore && chosenStore.actions;
-    if (chosenStore && chosenStore.state) setState({ ...chosenStore.state });
-    const subscription = chosenStore && chosenStore.subscribe(setState);
+    const subscription = storeRef.current.subscribe((data: T) => setState({ ...data }));
     return () => {
       if (subscription) subscription(); // Unsubscribe
     };
   }, []);
 
   return {
-    state: storeState.current,
+    state: state,
     views: storeViews.current,
     actions: storeActions.current
   };
@@ -67,20 +56,8 @@ export function useStore<T, V, A>(store: string) {
 
 export function useActions<A>(store: string) {
   const _stores: StoreInContext<BaseStore>[] = useContext(CrateboxReactContext);
-  const storeActions = useRef<A>({} as A);
-
-  useEffect(() => {
-    let chosenStore: BaseStore | null = null;
-    const amountOfStores = _stores.length;
-    let found = false;
-    for (let i = 0; i < amountOfStores && !found; i++) {
-      if (_stores[i].id === store) {
-        chosenStore = _stores[i].store;
-        found = true;
-      }
-    }
-    storeActions.current = chosenStore && chosenStore.actions;
-  }, []);
+  // @ts-ignore because it's not going to be undefined dear typscript...
+  const storeActions = useRef<A>(_stores.find(s => s.id === store).store.actions);
 
   return {
     actions: storeActions.current
