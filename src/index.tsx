@@ -64,3 +64,25 @@ export function useStore<T, V, A>(store: string) {
     actions: storeActions.current
   };
 }
+
+export function useActions<A>(store: string) {
+  const _stores: StoreInContext<BaseStore>[] = useContext(CrateboxReactContext);
+  const storeActions = useRef<A>({} as A);
+
+  useEffect(() => {
+    let chosenStore: BaseStore | null = null;
+    const amountOfStores = _stores.length;
+    let found = false;
+    for (let i = 0; i < amountOfStores && !found; i++) {
+      if (_stores[i].id === store) {
+        chosenStore = _stores[i].store;
+        found = true;
+      }
+    }
+    storeActions.current = chosenStore && chosenStore.actions;
+  }, []);
+
+  return {
+    actions: storeActions.current
+  };
+}
